@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+    <title>Mapa de Trayectos</title>
+    <link rel="icon" href="smiley.png" type="image/x-icon">
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&v=weekly5"></script>
+    <script>
+        var directionsDisplay;
+        var directionsService = new google.maps.DirectionsService();
+        var map;
+        function initialize() {
+            directionsDisplay = new google.maps.DirectionsRenderer();
+            var centroMapa = new google.maps.LatLng(25.5400, -103.4000);
+            var opcionesMapa = {
+                zoom: 5, center: centroMapa
+            };
+            map = new google.maps.Map(document.getElementById('mapaDir'), opcionesMapa);
+            directionsDisplay.setMap(map);
+        }
+        function calcRuta() {
+            var origen = document.getElementById('origen').value;
+            var destino = document.getElementById('destino').value;
+            var request = {
+
+                origin: origen,
+
+                destination: destino,
+
+                travelMode: google.maps.TravelMode.DRIVING
+
+            };
+
+            directionsService.route(request, function (response, status) {
+
+                if (status == google.maps.DirectionsStatus.OK) {
+
+                    directionsDisplay.setDirections(response);
+
+                }
+
+            });
+
+        }
+
+        google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+
+    <style type="text/css">
+        html,
+        body {
+
+            height: 100%;
+
+            margin: 0px;
+
+            padding: 5px;
+
+            background-color: rgb(10, 12, 70);
+
+        }
+
+        #mapaDir {
+
+            margin: 10px;
+
+            padding: 10px;
+
+            top: 55px;
+            left: 10%;
+            right: 10%;
+
+            width: 75%;
+            height: 80%;
+            min-width: 500px;
+            min-height: 400px;
+
+            border: 1px solid #000;
+
+            z-index: 1;
+
+        }
+
+        #panel {
+
+            position: absolute;
+
+            top: 5px;
+
+            left: 45%;
+
+            margin-left: -150px;
+
+            z-index: 2;
+
+            background: rgb(160, 168, 19);
+
+            padding: 10px;
+
+            border: 3px solid #999;
+
+            border-radius: 10px;
+
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div id="panel">
+
+        <b>Origen: </b>
+
+        <select id="origen" onchange="calcRuta();">
+
+            <option value="Ciudad Juarez, Chihuahua">Ju&aacute;rez</option>
+
+            <option value="Chihuahua, Mexico">Chihuahua</option>
+
+            <option value="Monterrey, Nuevo Leon">Monterrey</option>
+
+            <option value="Torreon, Coahuila">Torre&oacute;n</option>
+
+            <option value="Hermosillo, Sonora">Hermosillo</option>
+
+            <option value="Culiacan, Sinaloa">Culiac&aacute;n</option>
+
+            <option value="Mazatlan, Sinaloa">Mazatl&aacute;n</option>
+
+            <option value="Puerto Vallarta, Jalisco">Puerto Vallarta</option>
+
+            <option value="Guadalajara, Jalisco">Guadalajara</option>
+
+            <option value="Mexico City, Distrito Federal">Ciudad de M&eacute;xico</option>
+
+        </select>
+
+        <b>Destino: </b>
+
+        <select id="destino" onchange="calcRuta();">
+
+            <option value="Ciudad Juarez, Chihuahua"> Ju&aacute;rez </option>
+
+            <option value="Chihuahua, Mexico">Chihuahua</option>
+
+            <option value="Monterrey, Nuevo Leon">Monterrey</option>
+
+            <option value="Torreon, Coahuila">Torre&oacute;n</option>
+
+            <option value="Hermosillo, Sonora">Hermosillo</option>
+
+            <option value="Culiacan, Sinaloa">Culiac&aacute;n</option>
+
+            <option value="Mazatlan, Sinaloa">Mazatl&aacute;n</option>
+
+            <option value="Puerto Vallarta, Jalisco">Puerto Vallarta</option>
+
+            <option value="Guadalajara, Jalisco">Guadalajara</option>
+
+            <option value="Mexico City, Distrito Federal">Ciudad de M&eacute;xico</option>
+
+            <option value="Chiapas, Mexico">Chiapas</option>
+
+        </select>
+
+    </div>
+
+    <div id="mapaDir">
+
+    </div>
+
+</body>
+
+</html>

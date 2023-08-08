@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ejemplo de API de Facebook</title>
+</head>
+<body>
+  <button onclick="login()">Iniciar sesión con Facebook</button>
+
+  <script>
+    // Función para inicializar la API de Facebook
+    function initializeFacebookAPI() {
+      // Configura las credenciales de tu aplicación
+      FB.init({
+        appId: '242491841721057',
+        cookie: true,
+        xfbml: true,
+        version: 'v3.0'
+      });
+    }
+
+    // Función para manejar el inicio de sesión
+    function login() {
+      // Llama a la API de Facebook para realizar el inicio de sesión
+      FB.login(function(response) {
+        if (response.authResponse) {
+          // El usuario ha iniciado sesión y ha autorizado tu aplicación
+          // Aquí puedes realizar acciones adicionales, como obtener datos del usuario, publicar en su nombre, etc.
+          console.log('Inicio de sesión exitoso');
+          console.log(response.authResponse);
+        } else {
+          // El usuario ha cancelado el inicio de sesión o no ha autorizado tu aplicación
+          console.log('Inicio de sesión cancelado');
+        }
+      }, { scope: 'email' });
+    }
+  </script>
+
+  <!-- Carga la SDK de Facebook y llama a la función para inicializar la API -->
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0&appId=TU_APP_ID&autoLogAppEvents=1"></script>
+</body>
+</html>

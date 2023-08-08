@@ -1,0 +1,16 @@
+{
+  "name": "climant",
+  "version": "1.0.0",
+  "description": "cruz azul",
+  "main": "aplicacion.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "base3": "node aplicacion.js --base=3"
+  },
+  "author": "jahir",
+  "license": "ISC",
+  "dependencies": {
+    "color": "^4.2.3",
+    "colors": "^1.4.0"
+  }
+}
